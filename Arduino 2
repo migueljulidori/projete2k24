@@ -1,3 +1,10 @@
+Arduino 2: 
+
+Controla se as plantas precisam de muita, média ou pouca água, através de dois 
+potenciômetros, um para cada sensor. A rega acontece até que a umidade necessária seja atingida. 
+
+*************CÓDIGO**************
+
 //# projete2k24
 //Codigos da projete 2k24
 //Arduino 2
