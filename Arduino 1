@@ -1,3 +1,31 @@
+Arduino 1: 
+
+Estamos utilizando a biblioteca <LiquidCrystal_STEM> para a tela LCD: 
+
+Tela 1: Mensagem de Bom dia para os leitores e introdução do grupo 1404; 
+
+Tela 2: Mostra a umidade das plantas dos dois sensores de umidade LM393; 
+
+Tela 3: Mostra a temperatura do ambiente pelo sensor de temperatura LM35; 
+
+Tela 4: Mensagem "#Projete 2K24". 
+
+
+Todas as informações exibidas no LCD também aparecerão no Monitor Serial. 
+
+
+Estado da umidade das plantas (Sensores LM393): 
+
+Entre 0 e 250 (umidade = seco); 
+
+Entre 250 e 500 (umidade = baixa); 
+
+Entre 500 e 750 (umidade = média); 
+
+Maior que 750 (umidade = alta). 
+
+*****************CÓDIGO*******************
+
 //# projete2k24
 //Codigos da projete 2k24
 //Arduino 1
