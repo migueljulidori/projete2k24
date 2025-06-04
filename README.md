@@ -1,2 +1,140 @@
-# projete2k24
-Codigos da projete 2k24
+//# projete2k24
+//Codigos da projete 2k24
+//Arduino 1
+
+#include <LiquidCrystal_I2C_STEM.h>
+
+LiquidCrystal_I2C_STEM lcd(0x27, 16, 2);
+int umidade1;
+int Botao1, Botao2, Activate;
+float Temp;
+int Ciclos;
+
+void setup()
+{
+  pinMode(5, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(9, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(13, OUTPUT);
+  lcd.backlight();
+  lcd.init();
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  Tela1();
+  Tela2();
+  Tela3();
+  Tela4();
+  fading();
+  PrintSerial();
+  delay(5000);
+}
+
+void Tela1()
+{
+  lcd.clear();
+  lcd.setCursor(4,0);
+  lcd.print("Bom dia!");
+  lcd.setCursor(1,1);
+  lcd.print("- GRUPO 1404 -");
+  delay(3000);
+}
+
+void Tela2()
+{
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("U1:");
+  EstadoPlanta1();
+  
+  
+  delay(4000);
+}
+
+void Tela3()
+{
+  lcd.clear();
+  int Temp = (analogRead(A0) * (5.0/1023))/0.01;
+  
+  lcd.setCursor(3,0);
+  lcd.print("Temperatura");
+  lcd.setCursor(4,1);
+  lcd.print(Temp);
+  lcd.print(" oC");
+  delay(4000);
+}
+
+void Tela4()
+{
+  lcd.clear();
+  lcd.setCursor(5,0);
+  lcd.print("PROJETE");
+  lcd.setCursor(6,1);
+  lcd.print("2K24");
+  delay(3000);
+}
+
+void PrintSerial()
+{
+  Serial.print("UMIDADE SENSOR 1: ");
+  Serial.println(umidade1);
+  
+  Serial.print("TEMPERATURA : ");
+  Serial.print(Temp);
+  Serial.println(" oC");
+  Ciclos = Ciclos + 1;
+  Serial.print("-------^Ciclos "); Serial.print(Ciclos); Serial.println("^-------");
+}
+
+void EstadoPlanta1()
+{
+  digitalWrite(9, 1);
+  delay(100);
+  umidade1 = analogRead(A1);
+
+    
+  if(umidade1 < 850){
+    lcd.setCursor(4,0);
+    lcd.print("SECO");
+    digitalWrite(13,1);
+  }
+  
+  if(umidade1 >= 700 && umidade1 < 850){
+    lcd.setCursor(4,0);
+    lcd.print("QUASE SECO");
+    digitalWrite(13,1);
+  }
+  
+  if(umidade1 >=500 && umidade1 < 700){
+    lcd.setCursor(4,0);
+    lcd.print("BAIXO");
+    digitalWrite(13,0);
+  }
+  
+  if(umidade1 >=300 && umidade1 < 500){
+    lcd.setCursor(4,0);
+    lcd.print("MEDIO");
+    digitalWrite(13,0);
+  }
+   
+  if(umidade1 >=150 && umidade1 < 300){
+    lcd.setCursor(4,0);
+    lcd.print("ALTO");
+    digitalWrite(13,0);
+  }
+  
+  if(umidade1 >=150){
+    lcd.setCursor(4,0);
+    lcd.print("MUITO ALTO");
+    digitalWrite(13,0);
+  }
+}
+
+void fading()
+{
+umidade1 = analogRead(A1)/4;
+analogWrite(5,umidade1);
+}
