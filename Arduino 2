@@ -1,4 +1,5 @@
-//PROJETE2K24
+//# projete2k24
+//Codigos da projete 2k24
 //Arduino 2
 
 int Umidade1, Trimpot1, Ciclos, TempoRega1;
