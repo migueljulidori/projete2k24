@@ -1,0 +1,67 @@
+//PROJETE2K24
+//Arduino 2
+
+int Umidade1, Trimpot1, Ciclos, TempoRega1;
+
+void setup()
+{
+  Serial.begin(9600);
+}
+
+void loop()
+{
+    Trimpot1 = analogRead(A0);
+
+  
+  //Trimpot 1    
+      	if(Trimpot1 < 184)
+        {
+          	TempoRega1 = 0,5;
+        }
+      
+      	if(Trimpot1 >= 184 && Trimpot1 < 511)
+        {
+          	TempoRega1 = 1;
+        }
+      
+      	if(Trimpot1 >= 511 && Trimpot1 < 839)
+        {
+          	TempoRega1 = 1,5;
+        }
+      
+      	if(Trimpot1 >= 839)
+        {
+          	TempoRega1 = 2;
+        }
+  
+
+
+  Rega1();
+ 
+  PrintSerial();
+}
+
+void Rega1()
+{
+  Umidade1 = analogRead(A2);
+  if(Umidade1 < 45)
+  {
+	digitalWrite(1, HIGH);
+    delay(TempoRega1*1000);
+    digitalWrite(1, LOW);
+  }
+}
+
+
+
+void PrintSerial()
+{
+  Serial.print("Trimpot 1: ");
+  Serial.println(Trimpot1);
+  Serial.print("umidade 1: ");
+  Serial.println(Umidade1);
+  Ciclos = Ciclos + 1;
+  Serial.print("-------^Ciclos "); Serial.print(Ciclos); Serial.println("^-------");
+  delay(1000);
+
+}
